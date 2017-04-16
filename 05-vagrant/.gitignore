@@ -1,0 +1,7 @@
+Vagrantfile
+.vagrant
+
+play-site.yml
+*.retry
+
+*.log
