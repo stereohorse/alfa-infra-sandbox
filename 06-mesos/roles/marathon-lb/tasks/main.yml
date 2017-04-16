@@ -1,0 +1,22 @@
+- name: create marathon-lb templates dir
+  file: path=/etc/marathon-lb/templates state=directory mode=0777
+
+- name: copy templates
+  copy: src={{ item }} dest=/etc/marathon-lb/templates
+  with_items:
+    - HAPROXY_HTTP_FRONTEND_ACL_WITH_PATH
+
+- name: start marathon-lb
+  docker_container:
+    name: marathon-lb
+    image: "0x06065a/marathon-lb:1.3.3"
+    ports:
+      - "9090:9090"
+      - "9091:9091"
+      - "80:80"
+    env:
+      PORTS: 9090
+    privileged: yes
+    volumes:
+      - /etc/marathon-lb/templates:/marathon-lb/templates
+    command: sse --marathon http://{{ ansible_hostname }}:8080 --group jpoint2017 --health-check

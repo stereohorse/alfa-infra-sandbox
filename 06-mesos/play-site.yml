@@ -1,0 +1,16 @@
+- hosts: masters
+  become: yes
+  roles:
+    - zookeeper
+    - mesos-master
+    - marathon
+
+
+- hosts: agents
+  vars:
+    mesos_master: "{{ groups['masters'][0] }}"
+  become: yes
+  roles:
+    - mesos-agent
+
+- include: play-app.yml
