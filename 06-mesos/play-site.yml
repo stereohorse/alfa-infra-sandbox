@@ -12,5 +12,3 @@
   become: yes
   roles:
     - mesos-agent
-
-- include: play-app.yml

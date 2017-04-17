@@ -1,3 +1,8 @@
+#!/usr/bin/env sh
+
+set -x
+
+cat << EOF > pikachu-server-manifest.json
 [
   {
     "id": "pikachu-server",
@@ -44,3 +49,4 @@
     }
   }
 ]
+EOF

@@ -1,3 +1,8 @@
+#!/usr/bin/env sh
+
+set -x
+
+cat << EOF > pikachu-server-manifest.json
 [
   {
     "id": "pikachu-server",
@@ -31,16 +36,10 @@
       }
     ],
 
-    "labels": {
-      "HAPROXY_GROUP": "sandbox",
-      "HAPROXY_0_VHOST": "pika.sandbox",
-      "HAPROXY_0_HTTP_BACKEND_PROXYPASS_PATH": "/pika",
-      "HAPROXY_0_PATH": "/pika"
-    },
-
     "upgradeStrategy": {
       "maximumOverCapacity": 0.5,
       "minimumHealthCapacity": 1.0
     }
   }
 ]
+EOF

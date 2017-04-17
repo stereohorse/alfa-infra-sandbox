@@ -9,14 +9,11 @@
 - name: start marathon-lb
   docker_container:
     name: marathon-lb
-    image: "0x06065a/marathon-lb:1.3.3"
-    ports:
-      - "9090:9090"
-      - "9091:9091"
-      - "80:80"
+    image: 0x06065a/marathon-lb:1.3.3
+    network_mode: host
     env:
       PORTS: 9090
     privileged: yes
     volumes:
       - /etc/marathon-lb/templates:/marathon-lb/templates
-    command: sse --marathon http://{{ ansible_hostname }}:8080 --group jpoint2017 --health-check
+    command: sse --marathon http://{{ ansible_eth1.ipv4.address }}:8080 --group sandbox --health-check
