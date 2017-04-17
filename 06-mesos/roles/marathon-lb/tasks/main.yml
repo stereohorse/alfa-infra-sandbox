@@ -16,4 +16,4 @@
     privileged: yes
     volumes:
       - /etc/marathon-lb/templates:/marathon-lb/templates
-    command: sse --marathon http://{{ ansible_eth1.ipv4.address }}:8080 --group sandbox --health-check
+    command: sse --marathon http://{{ ansible_hostname }}:8080 --group sandbox --health-check
