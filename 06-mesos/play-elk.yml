@@ -1,4 +1,19 @@
 - hosts: masters
-  become: yes
-  roles:
-    - marathon-lb
+  tasks:
+    - name: start elasticsearch
+      uri:
+        url: "http://localhost:8080/v2/apps?force=true"
+        method: PUT
+        body: "{{ lookup('template','manifests/es.json') }}"
+        body_format: json
+
+- hosts: masters
+  vars:
+    mlb_host: "{{ hostvars[groups['masters'][0]]['ansible_eth1']['ipv4']['address'] }}"
+  tasks:
+    - name: start kibana
+      uri:
+        url: "http://localhost:8080/v2/apps?force=true"
+        method: PUT
+        body: "{{ lookup('template','manifests/kibana.json') }}"
+        body_format: json

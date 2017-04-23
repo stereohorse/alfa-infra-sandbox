@@ -1,0 +1,50 @@
+[
+  {
+    "id": "es",
+
+    "cpus": 0.1,
+    "mem": 3072,
+    "instances": 1,
+
+    "container": {
+      "type": "DOCKER",
+      "docker": {
+        "image": "docker.elastic.co/elasticsearch/elasticsearch:5.3.0",
+        "network": "BRIDGE",
+        "portMappings": [{
+            "containerPort": 9200
+        }]
+      }
+    },
+
+    "env": {
+      "ES_JAVA_OPTS": "-Xms2g -Xmx2g",
+      "xpack.security.enabled": "false",
+      "LOGGING_VERBOSE": "true"
+    },
+
+    "labels": {
+      "HAPROXY_GROUP": "sandbox",
+      "HAPROXY_0_VHOST": "es.sandbox",
+      "HAPROXY_0_HTTP_BACKEND_PROXYPASS_PATH": "/es",
+      "HAPROXY_0_PATH": "/es"
+    },
+
+    "healthChecks": [
+      {
+        "gracePeriodSeconds": 300,
+        "intervalSeconds": 5,
+        "maxConsecutiveFailures": 3,
+        "path": "/_cat/health",
+        "portIndex": 0,
+        "protocol": "HTTP",
+        "timeoutSeconds": 10
+      }
+    ],
+
+    "upgradeStrategy": {
+      "maximumOverCapacity": 0,
+      "minimumHealthCapacity": 0
+    }
+  }
+]

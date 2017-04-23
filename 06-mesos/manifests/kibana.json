@@ -1,0 +1,40 @@
+[
+  {
+    "id": "kibana",
+
+    "cpus": 0.1,
+    "mem": 1024,
+    "instances": 1,
+
+    "container": {
+      "type": "DOCKER",
+      "docker": {
+        "image": "docker.elastic.co/kibana/kibana:5.3.0",
+        "network": "HOST"
+      }
+    },
+
+    "env": {
+      "ELASTICSEARCH_URL": "http://{{ mlb_host }}/es",
+      "XPACK_MONITORING_ENABLED": "false",
+      "XPACK_SECURITY_ENABLED": "false"
+    },
+
+    "healthChecks": [
+      {
+        "gracePeriodSeconds": 300,
+        "intervalSeconds": 5,
+        "maxConsecutiveFailures": 3,
+        "path": "/",
+        "port": 5601,
+        "protocol": "HTTP",
+        "timeoutSeconds": 10
+      }
+    ],
+
+    "upgradeStrategy": {
+      "maximumOverCapacity": 0,
+      "minimumHealthCapacity": 0
+    }
+  }
+]
