@@ -1,0 +1,45 @@
+[
+  {
+    "id": "marathon-lb",
+
+    "cpus": 0.1,
+    "mem": 256,
+    "instances": 1,
+
+    "cmd": "/marathon-lb/run sse --marathon http://{{ marathon_host }}:8080 --group sandbox --health-check",
+
+    "container": {
+      "type": "DOCKER",
+      "docker": {
+        "image": "0x06065a/marathon-lb:1.3.3-paths-1",
+        "network": "HOST",
+        "privileged": true
+      }
+    },
+
+    "env": {
+      "PORTS": "9090"
+    },
+
+    "healthChecks": [
+      {
+        "gracePeriodSeconds": 300,
+        "intervalSeconds": 5,
+        "maxConsecutiveFailures": 3,
+        "path": "/_haproxy_health_check",
+        "port": 9090,
+        "protocol": "HTTP",
+        "timeoutSeconds": 10
+      }
+    ],
+
+    "constraints": [
+      ["hostname", "LIKE", "vm1"]
+    ],
+
+    "upgradeStrategy": {
+      "maximumOverCapacity": 0.5,
+      "minimumHealthCapacity": 1.0
+    }
+  }
+]

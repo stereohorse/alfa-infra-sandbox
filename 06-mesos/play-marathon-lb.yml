@@ -1,4 +1,10 @@
 - hosts: masters
-  become: yes
-  roles:
-    - marathon-lb
+  vars:
+    marathon_host: "{{ hostvars[groups['masters'][0]]['ansible_eth1']['ipv4']['address'] }}"
+  tasks:
+    - name: start marathon-lb
+      uri:
+        url: "http://localhost:8080/v2/apps?force=true"
+        method: PUT
+        body: "{{ lookup('template','manifests/marathon-lb.json') }}"
+        body_format: json

@@ -2,7 +2,7 @@
 
 set -x
 
-cat << EOF > pikachu-server-manifest.json
+cat << EOF > manifests/pikachu-server-manifest.json
 [
   {
     "id": "pikachu-server",
@@ -21,6 +21,8 @@ cat << EOF > pikachu-server-manifest.json
         }]
       }
     },
+
+    "constraints": [["hostname", "UNIQUE"]],
 
     "healthChecks": [
       {

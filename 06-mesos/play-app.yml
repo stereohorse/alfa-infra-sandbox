@@ -1,13 +1,8 @@
 - hosts: masters
   tasks:
-
-    - name: wait for marathon launch
-      wait_for:
-        port: 8080
-
     - name: start pikachu server
       uri:
         url: "http://localhost:8080/v2/apps?force=true"
         method: PUT
-        body: "{{ lookup('template','pikachu-server-manifest.json') }}"
+        body: "{{ lookup('template','manifests/pikachu-server-manifest.json') }}"
         body_format: json
