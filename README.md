@@ -11,6 +11,7 @@
 2. virtualbox
 3. vagrant
 4. ansible
+5. python 3
 
 ### Подготовить vagrant
 
@@ -43,6 +44,12 @@ $ brew cask install vagrant
 
 ```bash
 $ brew install ansible
+```
+
+### Python 3
+
+```bash
+$ brew install python3
 ```
 
 ### Образ для vagrant
