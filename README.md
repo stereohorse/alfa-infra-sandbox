@@ -3,7 +3,7 @@
 Может занять **около получаса**. В основном - ожидание загрузки образов.
 Поэтому лучше сделать заранее.
 
-Инструкция написана для Macos. При установке может быть полезна (эта утилитка)[https://developer.apple.com/legacy/library/documentation/Darwin/Reference/ManPages/man8/caffeinate.8.html].
+Инструкция написана для Macos. При установке может быть полезна [эта утилитка](https://developer.apple.com/legacy/library/documentation/Darwin/Reference/ManPages/man8/caffeinate.8.html).
 
 С таким же успехом можно настроить и Linux-дистрибутив, используя вместо `brew` родной менеджер пакетов. 
 
